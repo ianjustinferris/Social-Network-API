@@ -1,15 +1,17 @@
+/*
+        ___           ___           ___           ___                    ___           ___          _____          ___                   
+       /__/\         /  /\         /  /\         /  /\                  /__/\         /  /\        /  /::\        /  /\                  
+       \  \:\       /  /:/_       /  /:/_       /  /::\                |  |::\       /  /::\      /  /:/\:\      /  /:/_                 
+        \  \:\     /  /:/ /\     /  /:/ /\     /  /:/\:\               |  |:|:\     /  /:/\:\    /  /:/  \:\    /  /:/ /\    ___     ___ 
+    ___  \  \:\   /  /:/ /::\   /  /:/ /:/_   /  /:/~/:/             __|__|:|\:\   /  /:/  \:\  /__/:/ \__\:|  /  /:/ /:/_  /__/\   /  /\
+   /__/\  \__\:\ /__/:/ /:/\:\ /__/:/ /:/ /\ /__/:/ /:/___          /__/::::| \:\ /__/:/ \__\:\ \  \:\ /  /:/ /__/:/ /:/ /\ \  \:\ /  /:/
+   \  \:\ /  /:/ \  \:\/:/~/:/ \  \:\/:/ /:/ \  \:\/:::::/          \  \:\~~\__\/ \  \:\ /  /:/  \  \:\  /:/  \  \:\/:/ /:/  \  \:\  /:/ 
+    \  \:\  /:/   \  \::/ /:/   \  \::/ /:/   \  \::/~~~~            \  \:\        \  \:\  /:/    \  \:\/:/    \  \::/ /:/    \  \:\/:/  
+     \  \:\/:/     \__\/ /:/     \  \:\/:/     \  \:\                 \  \:\        \  \:\/:/      \  \::/      \  \:\/:/      \  \::/   
+      \  \::/        /__/:/       \  \::/       \  \:\                 \  \:\        \  \::/        \__\/        \  \::/        \__\/    
+       \__\/         \__\/         \__\/         \__\/                  \__\/         \__\/                       \__\/                  
 
-//        ___           ___           ___           ___                    ___           ___          _____          ___                   
-//       /__/\         /  /\         /  /\         /  /\                  /__/\         /  /\        /  /::\        /  /\                  
-//       \  \:\       /  /:/_       /  /:/_       /  /::\                |  |::\       /  /::\      /  /:/\:\      /  /:/_                 
-//        \  \:\     /  /:/ /\     /  /:/ /\     /  /:/\:\               |  |:|:\     /  /:/\:\    /  /:/  \:\    /  /:/ /\    ___     ___ 
-//    ___  \  \:\   /  /:/ /::\   /  /:/ /:/_   /  /:/~/:/             __|__|:|\:\   /  /:/  \:\  /__/:/ \__\:|  /  /:/ /:/_  /__/\   /  /\
-//   /__/\  \__\:\ /__/:/ /:/\:\ /__/:/ /:/ /\ /__/:/ /:/___          /__/::::| \:\ /__/:/ \__\:\ \  \:\ /  /:/ /__/:/ /:/ /\ \  \:\ /  /:/
-//   \  \:\ /  /:/ \  \:\/:/~/:/ \  \:\/:/ /:/ \  \:\/:::::/          \  \:\~~\__\/ \  \:\ /  /:/  \  \:\  /:/  \  \:\/:/ /:/  \  \:\  /:/ 
-//    \  \:\  /:/   \  \::/ /:/   \  \::/ /:/   \  \::/~~~~            \  \:\        \  \:\  /:/    \  \:\/:/    \  \::/ /:/    \  \:\/:/  
-//     \  \:\/:/     \__\/ /:/     \  \:\/:/     \  \:\                 \  \:\        \  \:\/:/      \  \::/      \  \:\/:/      \  \::/   
-//      \  \::/        /__/:/       \  \::/       \  \:\                 \  \:\        \  \::/        \__\/        \  \::/        \__\/    
-//       \__\/         \__\/         \__\/         \__\/                  \__\/         \__\/                       \__\/                  
+*/
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -18,23 +20,27 @@ const { Schema, model } = require('mongoose');
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
 
-// Create User Schema -> define the shape of the documents within that collection.
+/* 
+
+Create User Schema -> define the shape of the documents within that collection.
 
 
 
-// In this case, userSchema is a new instance of Schema being passed objects with params that define the data.
+ In this case, userSchema is a new instance of Schema being passed objects with params that define the data.
 
-// type: [String, Number, Date, Buffer, Boolean, Mixed, ObjectId, Array, Decimal128, Map]
+ type: [String, Number, Date, Buffer, Boolean, Mixed, ObjectId, Array, Decimal128, Map]
 
-// unique: Tells Mongoose that each document must have a unique value for a given path
+ unique: Tells Mongoose that each document must have a unique value for a given path
 
-// required: Sets field as requirement for data
+ required: Sets field as requirement for data
 
-// trim: Removes the white space from the strings
+ trim: Removes the white space from the strings
 
-// match: A validation technique using Regex format for email
+ match: A validation technique using Regex format for email
 
-// thoughts/friends: Array of _id values referencing the Thought and User models
+thoughts/friends: Array of _id values referencing the Thought and User models 
+
+*/
 
 const userSchema = new Schema(
   {

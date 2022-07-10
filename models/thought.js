@@ -1,33 +1,71 @@
-const { Schema, model } = require('mongoose');
-const assignmentSchema = require('./User');
 
-// Schema to create Student model
-const studentSchema = new Schema(
+/*                  ___           ___                                ___           ___          _____          ___                   
+        ___        /__/\         /  /\          ___                 /__/\         /  /\        /  /::\        /  /\                  
+       /  /\       \  \:\       /  /::\        /  /\               |  |::\       /  /::\      /  /:/\:\      /  /:/_                 
+      /  /:/        \__\:\     /  /:/\:\      /  /:/               |  |:|:\     /  /:/\:\    /  /:/  \:\    /  /:/ /\    ___     ___ 
+     /  /:/     ___ /  /::\   /  /:/  \:\    /  /:/              __|__|:|\:\   /  /:/  \:\  /__/:/ \__\:|  /  /:/ /:/_  /__/\   /  /\
+    /  /::\    /__/\  /:/\:\ /__/:/ \__\:\  /  /::\             /__/::::| \:\ /__/:/ \__\:\ \  \:\ /  /:/ /__/:/ /:/ /\ \  \:\ /  /:/
+   /__/:/\:\   \  \:\/:/__\/ \  \:\ /  /:/ /__/:/\:\            \  \:\~~\__\/ \  \:\ /  /:/  \  \:\  /:/  \  \:\/:/ /:/  \  \:\  /:/ 
+   \__\/  \:\   \  \::/       \  \:\  /:/  \__\/  \:\            \  \:\        \  \:\  /:/    \  \:\/:/    \  \::/ /:/    \  \:\/:/  
+        \  \:\   \  \:\        \  \:\/:/        \  \:\            \  \:\        \  \:\/:/      \  \::/      \  \:\/:/      \  \::/   
+         \__\/    \  \:\        \  \::/          \__\/             \  \:\        \  \::/        \__\/        \  \::/        \__\/    
+                   \__\/         \__\/                              \__\/         \__\/                       \__\/       
+
+*/
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+
+const { Schema, model } = require('mongoose');
+const reactionSchema = require('./reaction');
+const date = require('date-and-time');
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
+
+// See User model for Schema params
+
+// Mongoose getters and setters allow you to execute custom logic when getting or setting a property on a Mongoose document. 
+// Getters let you transform data in MongoDB into a more user friendly form.
+
+// date.format(now, 'ddd, MMM DD YYYY') => 'Fri, Jan 02 2015'
+
+const thoughtSchema = new Schema(
   {
-    first: {
+    thoughtText: {
       type: String,
       required: true,
-      max_length: 50,
+      minlength: 1,
+      maxlength: 280,
     },
-    last: {
+
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (now) => date.format(now, 'ddd, MMM DD YYYY')
+    },
+
+    // User that created this thought
+    username: {
       type: String,
       required: true,
-      max_length: 50,
     },
-    github: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    assignments: [assignmentSchema],
+
+    reactions: [reactionSchema],
   },
+
   {
     toJSON: {
       getters: true,
     },
+    id: false,
   }
 );
 
-const Student = model('student', studentSchema);
+// A virtual that retrieves the length of the thought's reactions array field
 
-module.exports = Thought;
+thoughtSchema.virtual('reactionCount').get(function () {
+  return this.reactions.length;
+});
+
+const Thoughts = model('thoughts', thoughtSchema);
+
+module.exports = Thoughts;
