@@ -65,7 +65,14 @@ const userSchema = new Schema(
 
     friends: [{ type: Schema.Types.ObjectId, ref: "User" }]
 
-  });
+  },
+  {
+    toJSON: {
+      getters: true,
+    },
+    id: false,
+  }
+);
 
 
 // A virtual that retrieves the length of the user's 'friends' array field on query. 
