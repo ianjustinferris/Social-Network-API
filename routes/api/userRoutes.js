@@ -27,6 +27,7 @@ router
   //DELETE to remove user by its _id
   .delete(deleteUserById);
 
+// /api/users/:userId/friends/:friendId
 router
   .route('/:userId/friends/:friendId')
   //POST to add a new friend to a user's friend list
