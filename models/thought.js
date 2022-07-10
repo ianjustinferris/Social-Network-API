@@ -49,6 +49,7 @@ const thoughtSchema = new Schema(
       required: true,
     },
 
+    // Passing in reactionSchema as a nested document array
     reactions: [reactionSchema],
   },
 
