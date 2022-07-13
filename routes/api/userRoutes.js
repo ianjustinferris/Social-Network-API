@@ -1,4 +1,6 @@
 const router = require('express').Router();
+
+// Define functions for CRUD applications
 const {
   getAllUsers,
   getUserById,

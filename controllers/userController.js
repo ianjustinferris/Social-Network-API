@@ -1,14 +1,16 @@
-const { Course, Student } = require('../models');
+const { User, Thoughts } = require('../models');
 
 module.exports = {
-  // Get all courses
-  getCourses(req, res) {
-    Course.find()
+
+  // GET all users
+  getAllUsers(req, res) {
+    User.find()
       .then((courses) => res.json(courses))
       .catch((err) => res.status(500).json(err));
   },
-  // Get a course
-  getSingleCourse(req, res) {
+
+  // GET user by _id
+  getUserById(req, res) {
     Course.findOne({ _id: req.params.courseId })
       .select('-__v')
       .then((course) =>
@@ -18,8 +20,9 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Create a course
-  createCourse(req, res) {
+
+  // POST new user
+  postNewUser(req, res) {
     Course.create(req.body)
       .then((course) => res.json(course))
       .catch((err) => {
@@ -27,8 +30,9 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  // Delete a course
-  deleteCourse(req, res) {
+
+  // PUT user by _id
+  putUserById(req, res) {
     Course.findOneAndDelete({ _id: req.params.courseId })
       .then((course) =>
         !course
@@ -38,8 +42,9 @@ module.exports = {
       .then(() => res.json({ message: 'Course and students deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
-  // Update a course
-  updateCourse(req, res) {
+
+  // DELETE user by _id
+  deleteUserById(req, res) {
     Course.findOneAndUpdate(
       { _id: req.params.courseId },
       { $set: req.body },
@@ -52,4 +57,29 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+
+  // POST new friend
+  postNewFriend(req, res) {
+    Course.findOneAndDelete({ _id: req.params.courseId })
+      .then((course) =>
+        !course
+          ? res.status(404).json({ message: 'No course with that ID' })
+          : Student.deleteMany({ _id: { $in: course.students } })
+      )
+      .then(() => res.json({ message: 'Course and students deleted!' }))
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // DELETE friend
+  deleteFriend(req, res) {
+    Course.findOneAndDelete({ _id: req.params.courseId })
+      .then((course) =>
+        !course
+          ? res.status(404).json({ message: 'No course with that ID' })
+          : Student.deleteMany({ _id: { $in: course.students } })
+      )
+      .then(() => res.json({ message: 'Course and students deleted!' }))
+      .catch((err) => res.status(500).json(err));
+  },
+
 };

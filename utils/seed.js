@@ -1,5 +1,5 @@
 const connection = require('../config/connection');
-const { Course, Student } = require('../models');
+const { User, Thoughts } = require('../models');
 const { getRandomName, getRandomAssignments } = require('./data');
 
 connection.on('error', (err) => err);
@@ -8,10 +8,10 @@ connection.once('open', async () => {
   console.log('connected');
 
   // Drop existing courses
-  await Course.deleteMany({});
+  await User.deleteMany({});
 
   // Drop existing students
-  await Student.deleteMany({});
+  await Thoughts.deleteMany({});
 
   // Create empty array to hold the students
   const students = [];
